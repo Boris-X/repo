@@ -1,0 +1,14 @@
+.container {
+    writing-mode: vertical-lr;
+    //   transform: rotate(-90deg);
+    //   transform-origin: right top;
+  
+    a {
+      line-height: 5px;
+      min-width: 30px;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  

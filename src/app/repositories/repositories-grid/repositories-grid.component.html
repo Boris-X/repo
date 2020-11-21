@@ -1,0 +1,131 @@
+<!-- <p>repositories-grid works!</p> -->
+<div class="main-table-container d-flex">
+  <div class="table-container flex-grow-1">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="sortData($event)"
+    >
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.name }}
+        </td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="Description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      </ng-container>
+
+      <!-- Top 5 Contributors Column -->
+      <ng-container matColumnDef="Top 5 Contributors">
+        <th mat-header-cell *matHeaderCellDef>Top 5 Contributors</th>
+        <td mat-cell *matCellDef="let element">
+          <img
+            alt="contributor's avatar"
+            *ngFor="let contribute of element.contributor"
+            width="30px"
+            class="m-2"
+            src="{{ contribute.avatar_url }}"
+          />
+        </td>
+      </ng-container>
+
+      <!-- GitHubURL Column -->
+      <ng-container matColumnDef="GitHub URL">
+        <th mat-header-cell *matHeaderCellDef>GitHub URL</th>
+        <td mat-cell *matCellDef="let element">{{ element.git_url }}</td>
+      </ng-container>
+
+      <!-- Fork Column -->
+      <ng-container matColumnDef="Fork">
+        <th mat-header-cell *matHeaderCellDef>Fork</th>
+        <td mat-cell *matCellDef="let element" width="50">
+          <fa-icon
+            class="text-success"
+            *ngIf="element.fork"
+            [icon]="faCheck"
+          ></fa-icon>
+          <fa-icon
+            class="text-danger"
+            *ngIf="!element.fork"
+            [icon]="faTimes"
+          ></fa-icon>
+        </td>
+      </ng-container>
+
+      <!-- Star Count Column -->
+      <ng-container matColumnDef="Star Count">
+        <th mat-header-cell *matHeaderCellDef>Star</th>
+        <td mat-cell *matCellDef="let element" width="50">
+          {{ element.stargazers_count }}
+        </td>
+      </ng-container>
+
+      <!-- WatchersCount Column -->
+      <ng-container matColumnDef="Watchers Count">
+        <th mat-header-cell *matHeaderCellDef>Watcher</th>
+        <td mat-cell *matCellDef="let element" width="50">
+          {{ element.watchers_count }}
+        </td>
+      </ng-container>
+
+      <!-- License Column -->
+      <ng-container matColumnDef="License">
+        <th mat-header-cell *matHeaderCellDef>License</th>
+        <td mat-cell *matCellDef="let element">{{ element.license?.name }}</td>
+      </ng-container>
+
+      <!-- Language Column -->
+      <ng-container matColumnDef="Language">
+        <th mat-header-cell *matHeaderCellDef>Language</th>
+        <td mat-cell *matCellDef="let element">{{ element.language }}</td>
+      </ng-container>
+
+      <!-- Createdtime Column -->
+      <ng-container matColumnDef="Created time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Created time</th>
+        <td mat-cell *matCellDef="let element" width="130">
+          {{ element.created_at | date }}
+        </td>
+      </ng-container>
+
+      <!-- Updatedtime Column -->
+      <ng-container matColumnDef="Updated time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated time</th>
+        <td mat-cell *matCellDef="let element" width="130">
+          {{ element.updated_at | date }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="navigateToRepository(row)"
+        class="row-hover"
+      ></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data</td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      role="navigation" 
+      aria-label="Pagination Navigation"
+      [pageSizeOptions]="[20, 50, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+  <div class="sidebar-container">
+    <app-repositories-grid-sider
+      [displayedColumns]="Columns"
+      [filter]="filter"
+      (changeFilter)="changeFilter($event)"
+      (changeDisplayColumns)="changeDisplayColumns($event)"
+    ></app-repositories-grid-sider>
+  </div>
+</div>

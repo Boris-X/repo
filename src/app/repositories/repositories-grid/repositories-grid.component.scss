@@ -1,0 +1,16 @@
+.main-table-container {
+}
+.table-container {
+}
+.sidebar-container {
+  //   width: 50px;
+  position: relative;
+}
+tr:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.row-hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}

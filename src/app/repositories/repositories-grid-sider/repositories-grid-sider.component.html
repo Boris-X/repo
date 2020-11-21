@@ -1,0 +1,88 @@
+<!-- <p>repositories-grid-sider works!</p> -->
+<div class="container d-flex flex-columns">
+    <a
+      mat-button
+      class="d-flex py-4"
+      type="button"
+      [mdePopoverTriggerFor]="ColumnPopover"
+      mdePopoverTriggerOn="click"
+      [mdePopoverOffsetX]="-46"
+      [mdePopoverCloseOnClick]="false"
+    >
+      <fa-icon [icon]="faColumns"></fa-icon>&nbsp;<span>Columns</span>
+    </a>
+    <a
+      mat-button
+      class="d-flex py-4"
+      type="button"
+      [mdePopoverTriggerFor]="FliterPopover"
+      mdePopoverTriggerOn="click"
+      [mdePopoverOffsetX]="-71"
+      [mdePopoverCloseOnClick]="false"
+    >
+      <fa-icon [icon]="faFilter"></fa-icon>&nbsp;Fliter
+    </a>
+  </div>
+  <!-- <ng-template
+      *ngIf="isOpenColumns"
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="isOpenColumns"
+    >
+      <div class="bg-white border p-3">
+        <ul class="list-unstyled mb-0">
+          <li *ngFor="let column of displayedColumns">
+            <mat-checkbox
+              [checked]="column.selected"
+              (click)="hanldeCheckBoxClick(column.name, !column.selected)"
+            >
+              {{ column.name }}
+            </mat-checkbox>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+    
+    <ng-template
+      *ngIf="isOpenFliter"
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="trigger"
+      [cdkConnectedOverlayOpen]="isOpenFliter"
+    >
+      123
+    </ng-template> -->
+  <mde-popover #ColumnPopover="mdePopover">
+    <div class="bg-white border p-3">
+      <ul class="list-unstyled mb-0">
+        <li *ngFor="let column of displayedColumns">
+          <mat-checkbox
+            [checked]="column.selected"
+            (click)="hanldeCheckBoxClick(column.name, !column.selected)"
+          >
+            {{ column.name }}
+          </mat-checkbox>
+        </li>
+      </ul>
+    </div>
+  </mde-popover>
+  
+  <mde-popover #FliterPopover="mdePopover">
+    <div class="bg-white border p-3">
+      Fork:
+      <div class="d-flex flex-column">
+        <mat-checkbox
+          [checked]="filter.showTrue"
+          (change)="hanldeFilterCheckBox('showTrue', filter.showTrue)"
+        >
+          <fa-icon class="text-success ml-2" [icon]="faCheck"></fa-icon>
+        </mat-checkbox>
+        <mat-checkbox
+          [checked]="filter.showFalse"
+          (change)="hanldeFilterCheckBox('showFalse', filter.showFalse)"
+        >
+          <fa-icon class="text-danger ml-2" [icon]="faTimes"></fa-icon>
+        </mat-checkbox>
+      </div>
+    </div>
+  </mde-popover>
+  
