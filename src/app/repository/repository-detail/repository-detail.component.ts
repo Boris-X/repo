@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -7,11 +7,11 @@ import {
   ApexDataLabels,
   ApexXAxis,
   ApexPlotOptions,
-} from 'ng-apexcharts';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { GridItem } from 'src/app/shared/entities/grid-item';
-import { Contributor } from '../../shared/entities/contributor';
+} from "ng-apexcharts";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { GridItem } from "src/app/shared/entities/grid-item";
+import { Contributor } from "../../shared/entities/contributor";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -22,12 +22,12 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-repository-detail',
-  templateUrl: './repository-detail.component.html',
-  styleUrls: ['./repository-detail.component.scss']
+  selector: "app-repository-detail",
+  templateUrl: "./repository-detail.component.html",
+  styleUrls: ["./repository-detail.component.scss"],
 })
 export class RepositoryDetailComponent implements OnInit {
-  @ViewChild('chart') chart: ChartComponent;
+  @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
   state$: Observable<any>;
   item: GridItem;
@@ -35,8 +35,7 @@ export class RepositoryDetailComponent implements OnInit {
   contributions: number[];
   contributorNames: string[];
 
-
-  constructor(public activatedRoute: ActivatedRoute) { }
+  constructor(public activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.state$ = this.activatedRoute.paramMap.pipe(
@@ -49,21 +48,21 @@ export class RepositoryDetailComponent implements OnInit {
     });
     this.contributions = this.contributors.map((x) => x.contributions);
     this.contributorNames = this.contributors.map((x) => x.login);
-    console.log('contributors', this.contributors);
-    console.log('item', this.item);
-    console.log('contributions', this.contributions);
-    console.log('contributorNames', this.contributorNames);
+    console.log("contributors", this.contributors);
+    console.log("item", this.item);
+    console.log("contributions", this.contributions);
+    console.log("contributorNames", this.contributorNames);
 
     this.chartOptions = {
       series: [
         {
-          name: 'contributions',
+          name: "contributions",
           data: this.contributions,
         },
       ],
       chart: {
-        type: 'bar',
-        height: 460,
+        type: "bar",
+        height: 450,
       },
       plotOptions: {
         bar: {
@@ -78,5 +77,4 @@ export class RepositoryDetailComponent implements OnInit {
       },
     };
   }
-
 }

@@ -1,13 +1,13 @@
 <div class="orga">
-  <div class="navbar">
-    <span>
+  <header class="navbar">
+    <address>
       <img
         src="../assets/images/location.png"
         alt="location icon"
         class="location"
       />
-      {{ organisation.location }}
-    </span>
+      <small>{{ organisation.location }}</small>
+    </address>
     <div class="social-links">
       <a
         [href]="organisation.html_url"
@@ -30,23 +30,28 @@
         <img src="../assets/images/blog.png" alt="blog icon" />
       </a>
     </div>
-  </div>
-  <div class="content container">
+  </header>
+  <main class="content">
     <h1>{{ organisation?.name }}</h1>
     <p>
       {{ organisation.description }}
     </p>
-
     <button
+      class="example-focus-monitor"
+      #navButton
       aria-label="Click the button to view all repositories under our organization"
       type="button"
       (click)="navToRepoGrid()"
+      cdkTrapFocus
     >
       Welcome to explore our
       {{ organisation.public_repos }} Github repositories under
       {{ organisation.name }}
     </button>
-  </div>
+  </main>
+  <footer class="footer">
+    <small>&copy;2020 Contributed by Faye Zheng | Phone: 0420 676 779</small>
+  </footer>
   <div class="bubbles">
     <img src="../assets/images/bubble.png" alt="bubble" />
     <img src="../assets/images/bubble.png" alt="bubble" />
