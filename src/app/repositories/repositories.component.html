@@ -12,6 +12,8 @@
       <a
         [href]="organisation.html_url"
         aria-label="Read more about us in Github"
+        tabindex="0"
+        #navGitHub
       >
         <svg
           class="octicon octicon-mark-github v-align-middle"
@@ -26,7 +28,12 @@
           ></path>
         </svg>
       </a>
-      <a [href]="organisation.blog" aria-label="Read more about us in Blog">
+      <a
+        [href]="organisation.blog"
+        aria-label="Read more about us in Blog"
+        tabindex="0"
+        #navBlog
+      >
         <img src="../assets/images/blog.png" alt="blog icon" />
       </a>
     </div>
@@ -43,6 +50,7 @@
       type="button"
       (click)="navToRepoGrid()"
       cdkTrapFocus
+      tabindex="0"
     >
       Welcome to explore our
       {{ organisation.public_repos }} Github repositories under

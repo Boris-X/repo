@@ -13,9 +13,8 @@ import {
   Organisation,
   OrganisationResolved,
 } from "../shared/entities/organisation";
-import { OrganisationService } from "../core/services/organisation.service";
+// import { OrganisationService } from "../core/services/organisation.service";
 import { LoggerService } from "../core/services/logger.service";
-import { HttpError } from "../shared/entities/http-error";
 import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
 
 @Component({
@@ -24,7 +23,9 @@ import { FocusMonitor, FocusOrigin } from "@angular/cdk/a11y";
   styleUrls: ["./repositories.component.scss"],
 })
 export class RepositoriesComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild("navButton") element: ElementRef<HTMLElement>;
+  @ViewChild("navButton") elementButton: ElementRef<HTMLElement>;
+  @ViewChild("navGitHub") elementGitHub: ElementRef<HTMLElement>;
+  @ViewChild("navBlog") elementBlog: ElementRef<HTMLElement>;
 
   organisation: Organisation;
   errorMessage: string;
@@ -38,7 +39,7 @@ export class RepositoriesComponent implements OnInit, OnDestroy, AfterViewInit {
     private _cdr: ChangeDetectorRef,
     private _ngZone: NgZone
   ) {
-    this.loggerService.log("Accessing the organisation!");
+    this.loggerService.log("Accessing The Organisation Page!");
   }
 
   ngOnInit(): void {
@@ -59,7 +60,17 @@ export class RepositoriesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this._focusMonitor.monitor(this.element).subscribe((origin) =>
+    this._focusMonitor.monitor(this.elementButton).subscribe((origin) =>
+      this._ngZone.run(() => {
+        this._cdr.markForCheck();
+      })
+    );
+    this._focusMonitor.monitor(this.elementGitHub).subscribe((origin) =>
+      this._ngZone.run(() => {
+        this._cdr.markForCheck();
+      })
+    );
+    this._focusMonitor.monitor(this.elementBlog).subscribe((origin) =>
       this._ngZone.run(() => {
         this._cdr.markForCheck();
       })
@@ -67,7 +78,9 @@ export class RepositoriesComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    this._focusMonitor.stopMonitoring(this.element);
+    this._focusMonitor.stopMonitoring(this.elementButton);
+    this._focusMonitor.stopMonitoring(this.elementGitHub);
+    this._focusMonitor.stopMonitoring(this.elementBlog);
   }
 
   navToRepoGrid(): void {

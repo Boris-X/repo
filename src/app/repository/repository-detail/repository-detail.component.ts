@@ -10,6 +10,7 @@ import {
 } from "ng-apexcharts";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { LoggerService } from "src/app/core/services/logger.service";
 import { GridItem } from "src/app/shared/entities/grid-item";
 import { Contributor } from "../../shared/entities/contributor";
 
@@ -35,7 +36,12 @@ export class RepositoryDetailComponent implements OnInit {
   contributions: number[];
   contributorNames: string[];
 
-  constructor(public activatedRoute: ActivatedRoute) {}
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    private loggerService: LoggerService
+  ) {
+    this.loggerService.log("Accessing The Repository Detail Page!");
+  }
 
   ngOnInit(): void {
     this.state$ = this.activatedRoute.paramMap.pipe(

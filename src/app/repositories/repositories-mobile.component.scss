@@ -21,15 +21,16 @@
     margin: 5px;
   }
 }
-.social-links img {
-  width: 30px;
-  margin: 10px auto;
-  cursor: pointer;
-  display: block;
-}
 
 .social-links {
-  text-align: center;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.social-links img {
+  width: 30px;
+  cursor: pointer;
 }
 
 .octicon {
@@ -64,6 +65,10 @@ button {
   border-radius: 20px;
   outline: none;
   cursor: pointer;
+}
+
+.cdk-keyboard-focused {
+  background: rgba(0, 255, 0, 0.5);
 }
 
 .footer {
